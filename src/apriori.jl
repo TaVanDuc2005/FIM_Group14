@@ -6,33 +6,35 @@
     generate_candidates(prev::Vector{Vector{Int}}) -> Vector{Vector{Int}}
 
 Bước join (ghép hai (k-1)-itemset chung k-2 item đầu) rồi prune
-(loại ứng viên có tập con (k-1) không phổ biến).
+(loại ứng viên có tập con (k-1) không phổ biến). `prev` phải gồm các itemset
+cùng kích thước và được sắp xếp theo thứ tự từ điển.
 """
 function generate_candidates(prev::Vector{Vector{Int}})::Vector{Vector{Int}}
     previous_itemsets = Set(prev)
     candidates = Vector{Vector{Int}}()
-    seen = Set{Vector{Int}}()
 
-    for i in eachindex(prev), j in (i + 1):length(prev)
-        a, b = prev[i], prev[j]
-        length(a) == length(b) || continue
+    for i in eachindex(prev)
+        a = prev[i]
         length(a) > 0 || continue
-        a[1:end-1] == b[1:end-1] || continue
-        a[end] < b[end] || continue
 
-        candidate = [a; b[end]]
-        all_subsets_frequent = true
-        for item_index in eachindex(candidate)
-            subset = [candidate[1:item_index-1]; candidate[item_index+1:end]]
-            if !(subset in previous_itemsets)
-                all_subsets_frequent = false
-                break
+        for j in (i + 1):length(prev)
+            b = prev[j]
+            a[1:end-1] == b[1:end-1] || break
+            a[end] < b[end] || continue
+
+            candidate = [a; b[end]]
+            all_subsets_frequent = true
+            for item_index in eachindex(candidate)
+                subset = [candidate[1:item_index-1]; candidate[item_index+1:end]]
+                if !(subset in previous_itemsets)
+                    all_subsets_frequent = false
+                    break
+                end
             end
-        end
 
-        if all_subsets_frequent && !(candidate in seen)
-            push!(candidates, candidate)
-            push!(seen, candidate)
+            if all_subsets_frequent
+                push!(candidates, candidate)
+            end
         end
     end
 
