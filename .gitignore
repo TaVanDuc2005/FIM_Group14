@@ -1,0 +1,7 @@
+*.jl.cov
+*.jl.mem
+Manifest.toml
+.ipynb_checkpoints/
+data/raw/
+data/spmf_out/
+*.zip

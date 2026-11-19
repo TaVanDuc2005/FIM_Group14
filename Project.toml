@@ -1,0 +1,6 @@
+name = "AprioriFIM"
+uuid = "5f544ea2-1aa2-4c25-b8c8-b024a6782403"
+version = "0.1.0"
+
+[compat]
+julia = "1.9"
