@@ -1,45 +1,74 @@
-# Apriori cơ bản. TODO: TỰ CÀI ĐẶT (cần hiểu từng bước để vấn đáp).
+# Apriori cơ bản (Agrawal & Srikant 1994, Fig. 1 và apriori-gen ở mục 2.1.1).
 # Biểu diễn: itemset = Vector{Int} đã sắp tăng dần;
 #            kết quả = Dict{Vector{Int},Int} (itemset => support tuyệt đối).
 
 """
-    generate_candidates(prev::Vector{Vector{Int}}) -> Vector{Vector{Int}}
+    all_subsets_frequent!(subset, candidate, previous_itemsets) -> Bool
 
-Bước join (ghép hai (k-1)-itemset chung k-2 item đầu) rồi prune
-(loại ứng viên có tập con (k-1) không phổ biến). `prev` phải gồm các itemset
-cùng kích thước và được sắp xếp theo thứ tự từ điển.
+Bước prune: mọi (k-1)-tập con của `candidate` phải nằm trong L(k-1).
+Bỏ phần tử cuối hoặc kế cuối cho ra chính hai itemset cha đã join (chắc chắn phổ biến),
+nên chỉ cần kiểm tra k-2 tập con còn lại. `subset` là buffer độ dài k-1 được dùng lại
+cho mọi lần kiểm tra, tránh cấp phát một mảng mới cho mỗi tập con.
 """
-function generate_candidates(prev::Vector{Vector{Int}})::Vector{Vector{Int}}
+function all_subsets_frequent!(subset::Vector{Int}, candidate::Vector{Int},
+                               previous_itemsets::Set{Vector{Int}})::Bool
+    k = length(candidate)
+    for skip in 1:(k - 2)
+        pos = 1
+        @inbounds for idx in 1:k
+            idx == skip && continue
+            subset[pos] = candidate[idx]
+            pos += 1
+        end
+        subset in previous_itemsets || return false
+    end
+    return true
+end
+
+"""
+    generate_candidates_with_parents(prev) -> (candidates, parents)
+
+apriori-gen: bước join (ghép hai (k-1)-itemset `prev[i]`, `prev[j]` chung k-2 item đầu)
+rồi prune. `parents[c] = (i, j)` là chỉ số hai itemset cha của `candidates[c]`, tương ứng
+trường *generators* trong mục 2.2.2 của bài báo; bản BitArray dùng nó để lấy tidset của
+hai cha theo chỉ số thay vì tra cứu bằng itemset.
+
+`prev` phải gồm các itemset cùng kích thước, sắp theo thứ tự từ điển. Khi đó
+`candidates` cũng được sinh ra theo thứ tự từ điển.
+"""
+function generate_candidates_with_parents(prev::Vector{Vector{Int}})
     previous_itemsets = Set(prev)
     candidates = Vector{Vector{Int}}()
+    parents = Vector{Tuple{Int,Int}}()
+    (isempty(prev) || isempty(first(prev))) && return candidates, parents
+    subset = Vector{Int}(undef, length(first(prev)))
 
     for i in eachindex(prev)
         a = prev[i]
-        length(a) > 0 || continue
-
         for j in (i + 1):length(prev)
             b = prev[j]
-            a[1:end-1] == b[1:end-1] || break
+            # prev đã sắp xếp: khi tiền tố k-2 item khác nhau thì các j sau cũng khác -> dừng.
+            @views a[1:end-1] == b[1:end-1] || break
             a[end] < b[end] || continue
 
             candidate = [a; b[end]]
-            all_subsets_frequent = true
-            for item_index in eachindex(candidate)
-                subset = [candidate[1:item_index-1]; candidate[item_index+1:end]]
-                if !(subset in previous_itemsets)
-                    all_subsets_frequent = false
-                    break
-                end
-            end
-
-            if all_subsets_frequent
+            if all_subsets_frequent!(subset, candidate, previous_itemsets)
                 push!(candidates, candidate)
+                push!(parents, (i, j))
             end
         end
     end
 
-    return candidates
+    return candidates, parents
 end
+
+"""
+    generate_candidates(prev::Vector{Vector{Int}}) -> Vector{Vector{Int}}
+
+Như `generate_candidates_with_parents` nhưng chỉ trả về danh sách ứng viên.
+"""
+generate_candidates(prev::Vector{Vector{Int}})::Vector{Vector{Int}} =
+    first(generate_candidates_with_parents(prev))
 
 """
     count_support(candidates, transactions) -> Dict{Vector{Int},Int}
