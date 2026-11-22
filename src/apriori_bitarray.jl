@@ -4,8 +4,9 @@
 #
 # Liên hệ bài báo (Agrawal & Srikant 1994, AprioriTid, Fig. 2 bước 7):
 # ứng viên c chứa trong giao dịch t <=> (c - c[k]) và (c - c[k-1]) đều chứa trong t.
-# Ở đây điều đó thành phép AND hai tidset của hai (k-1)-itemset sinh ra c,
-# nên sau lần quét đầu tiên không cần đọc lại CSDL.
+# Ở đây điều đó thành phép AND hai tidset của hai (k-1)-itemset sinh ra c.
+# CSDL chỉ được quét 2 lần (đếm item, rồi dựng tidset cho item phổ biến);
+# từ lượt k = 2 trở đi không đọc lại CSDL nữa.
 
 """
     build_tidsets(transactions, items) -> Dict{Int,BitVector}

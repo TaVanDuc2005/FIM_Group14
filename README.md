@@ -20,8 +20,14 @@ julia --project scripts/main.jl <input.txt> <minsup> <output.txt> [basic|bitarra
 Ví dụ (CSDL ở Figure 3 của bài báo):
 ```
 $ julia --project scripts/main.jl data/toy/toy1.txt 50% out.txt bitarray
-[bitarray] 4 transactions, minsup = 2 -> 9 frequent itemsets in 0.0 s
+[bitarray] 4 transactions, minsup = 2 -> 9 frequent itemsets
+  mining time: 0.03 ms (read: 0.33 ms, GC: 0.0 ms)
+  allocated by mining: 0.0 MB, peak RAM of process: 277.3 MB
 ```
+- `mining time` chỉ tính phần khai thác: thuật toán được chạy khởi động trên CSDL nhỏ trước
+  để loại thời gian biên dịch JIT; không gồm đọc/ghi file.
+- `allocated by mining`: tổng bộ nhớ thuật toán cấp phát. `peak RAM of process`: đỉnh bộ nhớ
+  của cả process, gồm khoảng 250–300 MB của Julia runtime, nên chỉ phản ánh thuật toán khi CSDL lớn.
 
 ## Các bản cài đặt
 | Bản | File | Đếm support |

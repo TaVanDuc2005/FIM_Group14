@@ -132,5 +132,4 @@ end
     @test isempty(apriori_bitarray([[1, 2], [2], [1]], 4))
 end
 
-# TODO: thêm >= 5 CSDL (nhỏ, lớn, thưa, dày, 1 giao dịch) và
-#       so sánh với file kết quả SPMF đặt trong test/data/.
+# So sánh với SPMF trên nhiều CSDL: xem test_spmf.jl.
