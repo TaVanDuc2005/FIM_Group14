@@ -12,11 +12,13 @@ Mỗi giao dịch được bỏ item trùng và sắp tăng dần.
 """
 function read_transactions(path::AbstractString)::Vector{Vector{Int}}
     transactions = Vector{Vector{Int}}()
-    for line in eachline(path)
-        s = strip(line)
-        (isempty(s) || s[1] in ('#', '@', '%')) && continue
-        items = sort!(unique!(parse.(Int, split(s))))
-        push!(transactions, items)
+    open(path) do io
+        for line in eachline(io)
+            s = strip(line)
+            (isempty(s) || s[1] in ('#', '@', '%')) && continue
+            items = sort!(unique!(parse.(Int, split(s))))
+            push!(transactions, items)
+        end
     end
     return transactions
 end
@@ -46,14 +48,16 @@ end
 """
 function read_itemsets(path::AbstractString)::ItemsetSupports
     itemsets = ItemsetSupports()
-    for line in eachline(path)
-        s = strip(line)
-        # SPMF bản mới ghi dòng metadata đầu file: @FILETYPE=..., @SOURCE=...
-        (isempty(s) || startswith(s, '@')) && continue
-        parts = split(s, "#SUP:")
-        length(parts) == 2 || error("Dòng không đúng định dạng SPMF: \"$s\"")
-        items = sort!(parse.(Int, split(parts[1])))
-        itemsets[items] = parse(Int, strip(parts[2]))
+    open(path) do io
+        for line in eachline(io)
+            s = strip(line)
+            # SPMF bản mới ghi dòng metadata đầu file: @FILETYPE=..., @SOURCE=...
+            (isempty(s) || startswith(s, '@')) && continue
+            parts = split(s, "#SUP:")
+            length(parts) == 2 || error("Dòng không đúng định dạng SPMF: \"$s\"")
+            items = sort!(parse.(Int, split(parts[1])))
+            itemsets[items] = parse(Int, strip(parts[2]))
+        end
     end
     return itemsets
 end

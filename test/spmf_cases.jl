@@ -28,3 +28,16 @@ const SPMF_CASES = [
 ]
 
 spmf_reference_path(name) = joinpath(SPMF_REF_DIR, name * ".txt")
+
+# Luật kết hợp: so với FPGrowth_association_rules_with_lift của SPMF (minlift = 0).
+# (tên case, file CSDL, minsup, minconf)
+const SPMF_RULE_CASES = [
+    ("rules_toy1_50_60",          TOY_DB,             "50%",  "60%"),  # 14 luật, kiểm tra tay được
+    ("rules_toy1_25_0",           TOY_DB,             "25%",  "0%"),   # minconf = 0: mọi cách tách X => Y
+    ("rules_toy1_50_100",         TOY_DB,             "50%",  "100%"), # chỉ luật chắc chắn
+    ("rules_single_100_50",       db("single"),       "100%", "50%"),  # mọi luật có conf = 1
+    ("rules_dense_small_50_80",   db("dense_small"),  "50%",  "80%"),
+    ("rules_long_tx_70_90",       db("long_tx"),      "70%",  "90%"),  # itemset dài: hậu tố nhiều mức
+    ("rules_sparse_0.3_10",       db("sparse"),       "0.3%", "10%"),  # thưa: chỉ có luật 2 item
+    ("rules_quest_medium_2_50",   db("quest_medium"), "2%",   "50%"),
+]

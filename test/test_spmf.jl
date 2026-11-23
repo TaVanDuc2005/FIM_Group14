@@ -1,7 +1,7 @@
 # So sánh với kết quả tham chiếu của SPMF (test/data/spmf/*.txt).
 # File tham chiếu được sinh bởi: julia --project scripts/spmf_reference.jl
 # Case nào chưa có file tham chiếu sẽ bị đánh dấu "Broken"/skip chứ không âm thầm pass.
-include("spmf_cases.jl")
+# Cần spmf_cases.jl đã được include (runtests.jl làm việc này).
 
 @testset "SPMF reference" begin
     rows = String[]

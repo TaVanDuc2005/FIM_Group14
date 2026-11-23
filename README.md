@@ -29,6 +29,27 @@ $ julia --project scripts/main.jl data/toy/toy1.txt 50% out.txt bitarray
 - `allocated by mining`: tổng bộ nhớ thuật toán cấp phát. `peak RAM of process`: đỉnh bộ nhớ
   của cả process, gồm khoảng 250–300 MB của Julia runtime, nên chỉ phản ánh thuật toán khi CSDL lớn.
 
+## Luật kết hợp và item dạng tên
+[src/rules.jl](src/rules.jl), dùng cho Chương 3:
+```julia
+using AprioriFIM
+tx, labels = encode_transactions([["bread", "milk"], ["bread", "beer"], ["bread", "milk", "beer"]])
+itemsets = apriori_bitarray(tx, 0.5)
+rules = association_rules(itemsets, length(tx); minconf = 0.6, minlift = 0.0)
+for r in sort(rules; by = r -> -r.lift)
+    println(format_rule(r, labels))      # {milk} => {bread}  sup = 2, conf = 1.0, lift = 1.0
+end
+```
+- `association_rules`: thủ tục ap-genrules (mục 3 của bài báo); trả về `Rule` gồm `antecedent`,
+  `consequent`, `support` (tuyệt đối), `confidence`, `lift`. Cùng ngưỡng và công thức với
+  `FPGrowth_association_rules_with_lift` của SPMF.
+- `encode_transactions` / `decode` / `format_rule`: đổi item dạng bất kỳ (chuỗi, mã visual word, ...)
+  sang số nguyên và ngược lại. `read_labeled_transactions(path; delim = ',')` đọc file mỗi dòng
+  một giao dịch có item là chuỗi.
+- `write_rules` / `read_rules`: định dạng SPMF `1 2 ==> 3 #SUP: 5 #CONF: 0.8 #LIFT: 1.2`.
+
+Notebook mẫu: [notebooks/demo_apriori_rules.ipynb](notebooks/demo_apriori_rules.ipynb).
+
 ## Các bản cài đặt
 | Bản | File | Đếm support |
 |---|---|---|
@@ -86,6 +107,8 @@ CSDL test ([test/data/db/](test/data/db/)) được sinh với seed cố định
 ```
 julia --project test/runtests.jl
 ```
+Gồm: unit test, đối chiếu tập phổ biến với SPMF (12 case), đối chiếu luật kết hợp với SPMF
+(8 case, `FPGrowth_association_rules_with_lift`) và so ap-genrules với vét cạn mọi cách tách luật.
 Output lần chạy test cuối (Julia 1.12.6, SPMF chạy trên Java 25):
 ```
 Tỉ lệ khớp với SPMF
@@ -114,12 +137,31 @@ quest_medium_2    2%      basic         920      920   100.0%
 quest_medium_2    2%      bitarray      920      920   100.0%
 quest_medium_7    7%      basic         144      144   100.0%
 quest_medium_7    7%      bitarray      144      144   100.0%
+
+Tỉ lệ khớp luật với SPMF
+case                      algo         spmf  matched   rate
+rules_toy1_50_60          basic          14       14   100.0%
+rules_toy1_50_60          bitarray       14       14   100.0%
+rules_toy1_25_0           basic          60       60   100.0%
+rules_toy1_25_0           bitarray       60       60   100.0%
+rules_toy1_50_100         basic           5        5   100.0%
+rules_toy1_50_100         bitarray        5        5   100.0%
+rules_single_100_50       basic         180      180   100.0%
+rules_single_100_50       bitarray      180      180   100.0%
+rules_dense_small_50_80   basic         373      373   100.0%
+rules_dense_small_50_80   bitarray      373      373   100.0%
+rules_long_tx_70_90       basic         298      298   100.0%
+rules_long_tx_70_90       bitarray      298      298   100.0%
+rules_sparse_0.3_10       basic          76       76   100.0%
+rules_sparse_0.3_10       bitarray       76       76   100.0%
+rules_quest_medium_2_50   basic        1873     1873   100.0%
+rules_quest_medium_2_50   bitarray     1873     1873   100.0%
 Test Summary: | Pass  Total  Time
-AprioriFIM    |   71     71  6.0s
+AprioriFIM    |  161    161  9.5s
 ```
 
 ## Cấu trúc
-- `src/`: mã nguồn (io, apriori, apriori_bitarray)
+- `src/`: mã nguồn (io, apriori, apriori_bitarray, rules)
 - `scripts/`: CLI (`main.jl`) và công cụ đối chiếu SPMF
 - `test/`: unit test, CSDL test và kết quả tham chiếu SPMF
 - `benchmarks/`: thực nghiệm; `applications/`: 2 ứng dụng
@@ -127,7 +169,8 @@ AprioriFIM    |   71     71  6.0s
 - `data/`: dữ liệu nhỏ; dữ liệu lớn: TODO link Hugging Face/Kaggle
 
 ## Colab
-TODO: link notebook công khai
+Notebook mẫu (cài gói từ GitHub, khai thác tập phổ biến và luật): [mở trên Colab](https://colab.research.google.com/github/TaVanDuc2005/FIM_Group14/blob/main/notebooks/demo_apriori_rules.ipynb).
+Trên Colab chọn *Runtime → Change runtime type → Julia* (Colab dùng Julia 1.10 LTS).
 
 ## Thành viên
 TODO

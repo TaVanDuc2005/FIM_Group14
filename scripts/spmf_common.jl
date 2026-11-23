@@ -9,16 +9,17 @@ const SPMF_JAR = get(ENV, "SPMF_JAR", joinpath(@__DIR__, "..", "tools", "spmf", 
 const SPMF_JAVA = get(ENV, "SPMF_JAVA", "java")
 
 """
-    run_spmf(input, output, minsup; algorithm = "Apriori") -> Float64
+    run_spmf(input, output, params...; algorithm = "Apriori") -> Float64
 
-Chạy `java -jar spmf.jar run <algorithm> <input> <output> <minsup>`, trả về thời gian (giây).
-`minsup` dùng cú pháp SPMF, ví dụ "40%".
+Chạy `java -jar spmf.jar run <algorithm> <input> <output> <params...>`, trả về thời gian (giây).
+`params` theo cú pháp SPMF, ví dụ `"40%"` (Apriori) hoặc `"40%", "60%", "0"`
+(minsup, minconf, minlift của FPGrowth_association_rules_with_lift).
 """
-function run_spmf(input::AbstractString, output::AbstractString, minsup::AbstractString;
+function run_spmf(input::AbstractString, output::AbstractString, params::AbstractString...;
                   algorithm::AbstractString = "Apriori")
     isfile(SPMF_JAR) || error("Không tìm thấy $SPMF_JAR. Tải spmf.jar và đặt vào tools/spmf/ hoặc đặt SPMF_JAR.")
     mkpath(dirname(abspath(output)))
-    cmd = `$SPMF_JAVA -jar $SPMF_JAR run $algorithm $input $output $minsup`
+    cmd = `$SPMF_JAVA -jar $SPMF_JAR run $algorithm $input $output $params`
     stderr_buf = IOBuffer()
     t = @elapsed ok = success(pipeline(cmd; stdout = devnull, stderr = stderr_buf))
     if !ok
