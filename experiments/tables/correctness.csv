@@ -1,0 +1,11 @@
+dataset,algo,#điểm minsup,#itemset SPMF,#khớp,tỉ lệ khớp (%),mọi điểm khớp 100%,min match_rate
+T10I4D100K,basic,8,32837,32837,100.0,True,100.0
+T10I4D100K,bitarray,8,32837,32837,100.0,True,100.0
+chess,basic,8,195227,195227,100.0,True,100.0
+chess,bitarray,8,195227,195227,100.0,True,100.0
+mushroom,basic,8,762994,762994,100.0,True,100.0
+mushroom,bitarray,8,762994,762994,100.0,True,100.0
+retail,basic,11,5124,5124,100.0,True,100.0
+retail,bitarray,18,23950,23950,100.0,True,100.0
+synthetic,basic,13,24027,24027,100.0,True,100.0
+synthetic,bitarray,13,24027,24027,100.0,True,100.0

@@ -1,0 +1,6 @@
+>/Users/khangcero/Documents/FIM_Group14/tools/spmf/spmf.jar
+============= APRIORI-FAST 2.65 - STATS =============
+ Frequent itemsets count : 48731
+ Maximum memory usage : 34.083946228027344 mb
+ Total time ~ 143 ms
+===================================================

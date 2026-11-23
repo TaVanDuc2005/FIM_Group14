@@ -1,0 +1,6 @@
+series,algo,log-log slope
+retail_0.3pct,bitarray,0.24
+retail_0.3pct,spmf,0.69
+retail_1pct,basic,1.13
+retail_1pct,bitarray,0.79
+retail_1pct,spmf,0.5
