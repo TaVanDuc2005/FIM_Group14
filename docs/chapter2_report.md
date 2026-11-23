@@ -44,13 +44,13 @@ Trên 55 điểm chạy của bitarray (tổng 1.039.035 itemset) và 48 điểm
 
 Hình 1–4 vẽ thời gian chạy của ba thuật toán theo minsup (trục log-log; đường liền là `e2e_s`, đường chấm là thời gian chỉ khai thác của bản nhóm; dấu × là điểm quá hạn).
 
-![Hình 1. Thời gian chạy theo minsup trên Chess](figures/runtime_chess.png)
+![Hình 1. Thời gian chạy theo minsup trên Chess](../experiments/figures/runtime_chess.png)
 
-![Hình 2. Thời gian chạy theo minsup trên Mushroom](figures/runtime_mushroom.png)
+![Hình 2. Thời gian chạy theo minsup trên Mushroom](../experiments/figures/runtime_mushroom.png)
 
-![Hình 3. Thời gian chạy theo minsup trên Retail](figures/runtime_retail.png)
+![Hình 3. Thời gian chạy theo minsup trên Retail](../experiments/figures/runtime_retail.png)
 
-![Hình 4. Thời gian chạy theo minsup trên T10I4D100K](figures/runtime_T10I4D100K.png)
+![Hình 4. Thời gian chạy theo minsup trên T10I4D100K](../experiments/figures/runtime_T10I4D100K.png)
 
 <p align="center"><b>Bảng III.</b> Thời gian chạy (giây, <code>e2e_s</code>) tại minsup cao nhất, trung bình và thấp nhất của mỗi tập</p>
 
@@ -79,7 +79,7 @@ Hình 1–4 vẽ thời gian chạy của ba thuật toán theo minsup (trục l
 
 ## D. Số lượng frequent itemset theo minsup
 
-![Hình 5. Số frequent itemset theo minsup (log-log) trên bốn tập benchmark](figures/itemsets_vs_minsup.png)
+![Hình 5. Số frequent itemset theo minsup (log-log) trên bốn tập benchmark](../experiments/figures/itemsets_vs_minsup.png)
 
 <p align="center"><b>Bảng IV.</b> Số frequent itemset ở minsup cao nhất và thấp nhất của lưới thực nghiệm</p>
 
@@ -95,7 +95,7 @@ Số lượng itemset tăng *phi tuyến* khi minsup giảm trên cả bốn t�
 
 ## E. Sử dụng bộ nhớ
 
-![Hình 6. Peak RSS toàn process (trái) và phần tăng RSS khi khai thác (phải) tại minsup trung bình](figures/memory.png)
+![Hình 6. Peak RSS toàn process (trái) và phần tăng RSS khi khai thác (phải) tại minsup trung bình](../experiments/figures/memory.png)
 
 <p align="center"><b>Bảng V.</b> Bộ nhớ tại minsup trung bình của từng tập (MB). Δ: tăng RSS khi khai thác; alloc: tổng bộ nhớ cấp phát</p>
 
@@ -129,7 +129,7 @@ Số lượng itemset tăng *phi tuyến* khi minsup giảm trên cả bốn t�
 
 CSDL con có 10%, 25%, 50%, 75% và 100% số giao dịch, lấy mẫu ngẫu nhiên có seed, các tập con lồng nhau, **giữ nguyên minsup tương đối** (Retail 1% và 0,3%) như thiết lập của bài báo (mục 4.5). Số itemset gần như không đổi theo kích thước (157–161 ở minsup 1%; 1.381–1.413 ở 0,3%), nên thời gian phản ánh đúng ảnh hưởng của |D|.
 
-![Hình 7. Thời gian chạy (trái) và thời gian chuẩn hoá so với 100% (phải) khi tăng số giao dịch trên Retail](figures/scalability.png)
+![Hình 7. Thời gian chạy (trái) và thời gian chuẩn hoá so với 100% (phải) khi tăng số giao dịch trên Retail](../experiments/figures/scalability.png)
 
 <p align="center"><b>Bảng VII.</b> Thời gian <code>e2e_s</code> (giây) tại 10% và 100% giao dịch và hệ số góc log-log (1,0 = tuyến tính)</p>
 
@@ -157,7 +157,7 @@ Dữ liệu tổng hợp theo bộ sinh IBM Quest như mô tả ở mục 4.3 c�
 - **fixedDT** (theo mục 4.8 của bài báo): tích D×T = 500 000 không đổi, ngưỡng tuyệt đối 500 giao dịch; T từ 5 đến 40, D giảm từ 100 000 xuống 12 500.
 - **fixedD**: D = 20 000 không đổi, minsup tương đối 1%; T từ 5 đến 30.
 
-![Hình 8. Thời gian chạy và số frequent itemset theo độ dài giao dịch trung bình T (hàng trên: fixedDT; hàng dưới: fixedD)](figures/txlen.png)
+![Hình 8. Thời gian chạy và số frequent itemset theo độ dài giao dịch trung bình T (hàng trên: fixedDT; hàng dưới: fixedD)](../experiments/figures/txlen.png)
 
 <p align="center"><b>Bảng VIII.</b> Thời gian <code>e2e_s</code> (giây) và số itemset theo T</p>
 
@@ -186,7 +186,7 @@ Dữ liệu tổng hợp theo bộ sinh IBM Quest như mô tả ở mục 4.3 c�
 
 **Nút thắt tại k = 2.** Bài báo chỉ ra C₂ là tổ hợp chập 2 của L₁, |C₂| = C(|L₁|, 2), không có bước prune. Số liệu `levels.csv` xác nhận chính xác công thức này ở cả bốn tập: Chess |L₁| = 19 → |C₂| = 171; Mushroom 27 → 351; Retail 515 → 132 355; T10I4D100K 661 → 218 130. Tuy nhiên hệ quả khác nhau hoàn toàn giữa dữ liệu thưa và dày (Bảng IX, Hình 9).
 
-![Hình 9. |C_k| và |L_k| theo từng mức k](figures/levels.png)
+![Hình 9. |C_k| và |L_k| theo từng mức k](../experiments/figures/levels.png)
 
 <p align="center"><b>Bảng IX.</b> Hồ sơ theo mức k tại minsup đại diện (thời gian của riêng bitarray)</p>
 
