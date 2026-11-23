@@ -1,0 +1,7 @@
+,alloc_mb,alloc_mb,e2e_s,e2e_s,e2e_s,peak_rss_mb,peak_rss_mb,peak_rss_mb,rss_delta_mb,rss_delta_mb
+algo,basic,bitarray,basic,bitarray,spmf,basic,bitarray,spmf,basic,bitarray
+dataset,,,,,,,,,,
+T10I4D100K,303.58,89.06,265.32,0.28,1.62,364.53,331.23,126.34,55.52,16.41
+chess,20.25,2.99,0.32,0.02,0.04,291.38,293.78,74.8,0.03,0.0
+mushroom,43.7,2.1,0.2,0.03,0.05,294.31,299.27,75.08,0.19,0.0
+retail,190.89,24.03,32.07,0.16,0.23,366.06,332.28,121.47,44.75,6.34

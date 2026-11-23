@@ -1,0 +1,40 @@
+experiment,series,dataset,param,minsup,algo,status,n_tx,minsup_count,n_itemsets,mine_s,e2e_s,wall_s,alloc_mb,peak_rss_mb,rss_base_mb,rss_delta_mb,gc_s,spmf_heap_mb,n_ref,matched,match_rate,exact,note
+sweep,quest_medium,quest_medium,10%,10%,spmf,ok,,,84,0.035,0.035,0.294,,64.72,,,,13.061241149902344,,,,,
+sweep,quest_medium,quest_medium,10%,10%,bitarray,ok,3000,300,84,0.0008,0.01317,2.276,0.27,295.78,295.78,0.0,0.0,,84,84,1.0,true,
+sweep,quest_medium,quest_medium,10%,10%,basic,ok,3000,300,84,0.02699,0.0387,1.764,5.32,277.3,277.27,0.03,0.0,,84,84,1.0,true,
+sweep,quest_medium,quest_medium,5%,5%,spmf,ok,,,242,0.047,0.047,0.252,,67.11,,,,14.083915710449219,,,,,
+sweep,quest_medium,quest_medium,5%,5%,bitarray,ok,3000,150,242,0.00154,0.01335,1.764,1.01,279.47,279.44,0.03,0.0,,242,242,1.0,true,
+sweep,quest_medium,quest_medium,5%,5%,basic,ok,3000,150,242,0.08591,0.09784,2.014,6.04,276.23,276.2,0.03,0.0,,242,242,1.0,true,
+sweep,quest_medium,quest_medium,2%,2%,spmf,ok,,,920,0.047,0.047,0.252,,75.45,,,,14.083946228027344,,,,,
+sweep,quest_medium,quest_medium,2%,2%,bitarray,ok,3000,60,920,0.00384,0.01552,1.763,2.82,279.97,279.94,0.03,0.0,,920,920,1.0,true,
+sweep,quest_medium,quest_medium,2%,2%,basic,ok,3000,60,920,0.21082,0.22322,2.268,7.6,276.59,276.56,0.03,0.0,,920,920,1.0,true,
+memory,quest_medium,quest_medium,5%,5%,spmf,ok,,,242,0.047,0.047,0.252,,66.3,,,,14.083915710449219,,,,,
+memory,quest_medium,quest_medium,5%,5%,bitarray,ok,3000,150,242,0.00157,0.01229,1.764,1.01,282.59,282.56,0.03,0.0,,242,242,1.0,true,
+memory,quest_medium,quest_medium,5%,5%,basic,ok,3000,150,242,0.08586,0.09758,2.017,6.04,279.92,279.89,0.03,0.0,,242,242,1.0,true,
+scalability,quest_medium_5pct,quest_medium,10,5%,spmf,ok,,,258,0.016,0.016,0.251,,66.19,,,,13.046615600585938,,,,,
+scalability,quest_medium_5pct,quest_medium,10,5%,bitarray,ok,300,15,258,0.00107,0.01103,1.764,0.95,280.33,280.3,0.03,0.0,,258,258,1.0,true,
+scalability,quest_medium_5pct,quest_medium,10,5%,basic,ok,300,15,258,0.00889,0.01937,1.763,1.47,278.8,278.77,0.03,0.0,,258,258,1.0,true,
+scalability,quest_medium_5pct,quest_medium,50,5%,spmf,ok,,,237,0.028,0.028,0.252,,64.67,,,,13.045623779296875,,,,,
+scalability,quest_medium_5pct,quest_medium,50,5%,bitarray,ok,1500,75,237,0.00133,0.01214,1.764,0.94,283.19,283.16,0.03,0.0,,237,237,1.0,true,
+scalability,quest_medium_5pct,quest_medium,50,5%,basic,ok,1500,75,237,0.04234,0.05276,1.765,3.46,278.38,278.34,0.03,0.0,,237,237,1.0,true,
+scalability,quest_medium_5pct,quest_medium,100,5%,spmf,ok,,,242,0.053,0.053,0.252,,66.73,,,,14.083915710449219,,,,,
+scalability,quest_medium_5pct,quest_medium,100,5%,bitarray,ok,3000,150,242,0.00146,0.01276,1.765,1.01,282.73,282.7,0.03,0.0,,242,242,1.0,true,
+scalability,quest_medium_5pct,quest_medium,100,5%,basic,ok,3000,150,242,0.08638,0.09756,2.016,6.04,278.25,278.22,0.03,0.0,,242,242,1.0,true,
+txlen,fixedDT,synthetic,5,0.004995,spmf,ok,,,609,0.338,0.338,0.503,,117.36,,,,43.49320983886719,,,,,T=5 D=100000
+txlen,fixedDT,synthetic,5,0.004995,bitarray,ok,100000,500,609,0.14522,0.22542,2.016,74.29,334.16,320.11,14.05,0.00921,,609,609,1.0,true,T=5 D=100000
+txlen,fixedDT,synthetic,5,0.004995,basic,ok,100000,500,609,184.51135,184.58969,186.201,198.47,375.52,313.11,62.41,0.04669,,609,609,1.0,true,T=5 D=100000
+txlen,fixedDT,synthetic,20,0.01998,spmf,ok,,,478,0.564,0.564,0.757,,96.31,,,,39.12389373779297,,,,,T=20 D=25000
+txlen,fixedDT,synthetic,20,0.01998,bitarray,ok,25000,500,478,0.07054,0.12668,2.016,43.83,304.95,300.11,4.84,0.0044,,478,478,1.0,true,T=20 D=25000
+txlen,fixedDT,synthetic,20,0.01998,basic,ok,25000,500,478,35.13631,35.18774,36.785,114.64,303.84,293.95,9.89,0.01736,,478,478,1.0,true,T=20 D=25000
+txlen,fixedDT,synthetic,40,0.03996,spmf,ok,,,485,0.896,0.896,1.259,,98.0,,,,38.08390808105469,,,,,T=40 D=12500
+txlen,fixedDT,synthetic,40,0.03996,bitarray,ok,12500,500,485,0.0729,0.12923,2.017,44.85,316.05,311.42,4.62,0.00488,,485,485,1.0,true,T=40 D=12500
+txlen,fixedDT,synthetic,40,0.03996,basic,ok,12500,500,485,19.91288,19.96703,21.672,83.39,317.48,306.33,11.16,0.00973,,485,485,1.0,true,T=40 D=12500
+txlen,fixedD,synthetic,5,1%,spmf,ok,,,132,0.048,0.048,0.253,,67.73,,,,17.04393768310547,,,,,T=5 D=20000
+txlen,fixedD,synthetic,5,1%,bitarray,ok,20000,200,132,0.00801,0.02652,1.765,4.78,289.42,289.39,0.03,0.0,,132,132,1.0,true,T=5 D=20000
+txlen,fixedD,synthetic,5,1%,basic,ok,20000,200,132,1.8491,1.86756,7.306,17.3,287.94,287.48,0.45,0.0,,132,132,1.0,true,T=5 D=20000
+txlen,fixedD,synthetic,15,1%,spmf,ok,,,1123,0.812,0.812,1.007,,101.11,,,,39.090911865234375,,,,,T=15 D=20000
+txlen,fixedD,synthetic,15,1%,bitarray,ok,20000,200,1123,0.1564,0.19423,2.268,105.59,316.7,301.28,15.42,0.01098,,1123,1123,1.0,true,T=15 D=20000
+txlen,fixedD,synthetic,15,1%,basic,ok,20000,200,1123,62.30458,62.34473,63.997,164.99,332.08,296.97,35.11,0.0282,,1123,1123,1.0,true,T=15 D=20000
+txlen,fixedD,synthetic,30,1%,spmf,ok,,,9048,6.292,6.292,6.552,,140.97,,,,41.76160430908203,,,,,T=30 D=20000
+txlen,fixedD,synthetic,30,1%,bitarray,ok,20000,200,9048,0.30207,0.3699,2.773,208.01,356.38,296.53,59.84,0.04368,,9048,9048,1.0,true,T=30 D=20000
+txlen,fixedD,synthetic,30,1%,basic,ok,20000,200,9048,123.95974,124.02506,125.548,346.91,387.22,292.44,94.78,0.10402,,9048,9048,1.0,true,T=30 D=20000
