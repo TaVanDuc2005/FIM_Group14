@@ -133,3 +133,17 @@ end
 end
 
 # So sánh với SPMF trên nhiều CSDL: xem test_spmf.jl.
+
+@testset "maxlen giới hạn kích thước tập" begin
+    for (name, minsup) in (("dense_small", 0.3), ("long_tx", 0.6), ("quest_medium", 0.02))
+        tx = read_transactions(joinpath(@__DIR__, "data", "db", name * ".txt"))
+        full = apriori_bitarray(tx, minsup)
+        for maxlen in (1, 2, 3, 100)
+            expected = filter(p -> length(p.first) <= maxlen, full)
+            @test apriori(tx, minsup; maxlen) == expected
+            @test apriori_bitarray(tx, minsup; maxlen) == expected
+        end
+    end
+    @test_throws ArgumentError apriori([[1, 2]], 1; maxlen = 0)
+    @test_throws ArgumentError apriori_bitarray([[1, 2]], 1; maxlen = 0)
+end

@@ -71,9 +71,13 @@ function and_count!(dest::BitVector, a::BitVector, b::BitVector)::Int
 end
 
 """
-    apriori_bitarray(transactions, minsup) -> Dict{Vector{Int},Int}
+    apriori_bitarray(transactions, minsup; maxlen = nothing) -> Dict{Vector{Int},Int}
+
+Cùng kết quả với `apriori` (kể cả tham số `maxlen`), đếm support bằng tidset dạng BitVector.
 """
-function apriori_bitarray(transactions::Vector{Vector{Int}}, minsup::Real)::Dict{Vector{Int},Int}
+function apriori_bitarray(transactions::Vector{Vector{Int}}, minsup::Real;
+                          maxlen::Union{Integer,Nothing} = nothing)::Dict{Vector{Int},Int}
+    check_maxlen(maxlen)
     minsup_count = min_support_count(minsup, length(transactions))
     item_counts = count_items(transactions)
     frequent_items = sort!([item for (item, c) in item_counts if c >= minsup_count])
@@ -90,7 +94,7 @@ function apriori_bitarray(transactions::Vector{Vector{Int}}, minsup::Real)::Dict
     end
 
     buffer = falses(length(transactions))
-    while !isempty(prev)
+    while !isempty(prev) && below_maxlen(prev, maxlen)
         candidates, parents = generate_candidates_with_parents(prev)
         isempty(candidates) && break
 

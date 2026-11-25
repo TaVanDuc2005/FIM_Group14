@@ -89,12 +89,22 @@ function count_support(candidates::Vector{Vector{Int}},
     return support
 end
 
+check_maxlen(maxlen) = maxlen === nothing || maxlen >= 1 ||
+    throw(ArgumentError("maxlen phải ≥ 1, nhận $maxlen"))
+
+"""Còn được sinh mức tiếp theo không: các tập trong `prev` có ít hơn `maxlen` item."""
+below_maxlen(prev, maxlen) = maxlen === nothing || length(first(prev)) < maxlen
+
 """
-    apriori(transactions, minsup) -> Dict{Vector{Int},Int}
+    apriori(transactions, minsup; maxlen = nothing) -> Dict{Vector{Int},Int}
 
 Trả về mọi tập phổ biến với support tuyệt đối. `minsup` là tỉ lệ hoặc số đếm.
+`maxlen` (tùy chọn) giới hạn số item tối đa của một tập: thuật toán dừng sau mức `maxlen`.
+Kết quả khi đó đúng bằng các tập phổ biến có không quá `maxlen` item.
 """
-function apriori(transactions::Vector{Vector{Int}}, minsup::Real)::Dict{Vector{Int},Int}
+function apriori(transactions::Vector{Vector{Int}}, minsup::Real;
+                 maxlen::Union{Integer,Nothing} = nothing)::Dict{Vector{Int},Int}
+    check_maxlen(maxlen)
     minsup_count = min_support_count(minsup, length(transactions))
     result = Dict{Vector{Int},Int}()
 
@@ -115,7 +125,7 @@ function apriori(transactions::Vector{Vector{Int}}, minsup::Real)::Dict{Vector{I
         end
     end
 
-    while !isempty(prev)
+    while !isempty(prev) && below_maxlen(prev, maxlen)
         sort!(prev)
         candidates = generate_candidates(prev)
         isempty(candidates) && break

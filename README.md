@@ -50,6 +50,20 @@ end
 
 Notebook mẫu: [notebooks/demo_apriori_rules.ipynb](notebooks/demo_apriori_rules.ipynb).
 
+Giới hạn kích thước tập: `apriori(tx, minsup; maxlen = 3)` và `apriori_bitarray(tx, minsup; maxlen = 3)`
+chỉ tìm các tập phổ biến có tối đa 3 item (dừng sau mức 3). Hữu ích với dữ liệu dày, nơi số tập
+phổ biến bùng nổ khi minsup thấp.
+
+## Ứng dụng 2: motif bảo tồn trong protein kinase
+Notebook: [notebooks/app2_protein_motifs.ipynb](notebooks/app2_protein_motifs.ipynb)
+([mở trên Colab](https://colab.research.google.com/github/TaVanDuc2005/FIM_Group14/blob/main/notebooks/app2_protein_motifs.ipynb)).
+- Dữ liệu: 344 protein kinase người (Pfam PF00069) và 1 000 protein người không phải kinase làm nền,
+  từ UniProt Swiss-Prot ([data/bio/](data/bio/), tải bằng `julia --project applications/prepare_protein_data.jl`).
+- Mỗi protein là một giao dịch gồm các đoạn 3 amino acid (3-mer); hàm xử lý ở
+  [applications/bioinformatics.jl](applications/bioinformatics.jl).
+- Kết quả: Apriori tự tìm lại các motif kinase đã biết (HRDLKPEN, DFG, APE); luật
+  `{DFG, HRD} => {KINASE}` có confidence 99%.
+
 ## Các bản cài đặt
 | Bản | File | Đếm support |
 |---|---|---|
