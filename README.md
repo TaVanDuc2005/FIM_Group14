@@ -187,7 +187,7 @@ AprioriFIM    |  187    187  11.2s
 - `notebooks/`: notebook Colab
 - `docs/`: báo cáo từng phần ([Chương 1](docs/chapter1_report.md), [Chương 2](docs/chapter2_report.md),
   [Ứng dụng 2](docs/chapter3_app2_report.md)); `docs/Report.pdf` sẽ được ghép sau
-- `data/`: dữ liệu nhỏ; dữ liệu lớn: TODO link Hugging Face/Kaggle
+- `data/`: dữ liệu kiểm thử (`toy/`), dữ liệu Ứng dụng 2 (`bio/`), và dữ liệu benchmark lớn (`chess`, `mushroom`, `retail`, `T10I4D100K` — không dùng `Accidents` trong thực nghiệm chính thức) tải vào `data/raw/` bằng `bash experiments/download_data.sh` từ [SPMF Datasets](https://www.philippe-fournier-viger.com/spmf/index.php?link=datasets.php) (dự phòng: [FIMI Repository](http://fimi.uantwerpen.be/data/)). Lưu ý: bản `mushroom` từ SPMF có 8.416 giao dịch.
 
 ## Colab
 Notebook mẫu (cài gói từ GitHub, khai thác tập phổ biến và luật): [mở trên Colab](https://colab.research.google.com/github/TaVanDuc2005/FIM_Group14/blob/main/notebooks/demo_apriori_rules.ipynb).

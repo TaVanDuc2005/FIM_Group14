@@ -20,7 +20,7 @@
 
 @@T_CORR@@
 
-Trên @@CORR_POINTS_BIT@@ điểm chạy của bitarray (tổng @@CORR_ITEMS_BIT@@ itemset) và @@CORR_POINTS_BAS@@ điểm của basic (tổng @@CORR_ITEMS_BAS@@ itemset), tỉ lệ khớp đều đạt 100%, và tỉ lệ khớp nhỏ nhất trên từng điểm cũng là 100%: không có itemset thiếu, thừa hay sai support. Basic có ít điểm hơn trên Retail do bị `timeout` hoặc bỏ qua ở minsup thấp (mục C). Kết quả này củng cố các test đơn vị của Chương 1 (71/71 test pass, 24 case đối chiếu SPMF) trên dữ liệu lớn hơn nhiều.
+Trên @@CORR_POINTS_BIT@@ điểm chạy của bitarray (tổng @@CORR_ITEMS_BIT@@ itemset) và @@CORR_POINTS_BAS@@ điểm của basic (tổng @@CORR_ITEMS_BAS@@ itemset), tỉ lệ khớp đều đạt 100%, và tỉ lệ khớp nhỏ nhất trên từng điểm cũng là 100%: không có itemset thiếu, thừa hay sai support. Basic có ít điểm hơn trên Retail do bị `timeout` hoặc bỏ qua ở minsup thấp (mục C). Kết quả này củng cố các test đơn vị của Chương 1 (187/187 test pass, gồm 12 case × 2 bản = 24 phép so sánh tập phổ biến và 8 case × 2 bản = 16 phép so sánh luật kết hợp với SPMF) trên dữ liệu lớn hơn nhiều.
 
 ## C. Thời gian chạy theo minsup
 

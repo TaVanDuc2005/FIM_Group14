@@ -38,7 +38,7 @@
 | synthetic | bitarray | 13 | 24.027 | 24.027 | 100,00 |
 
 
-Trên 55 điểm chạy của bitarray (tổng 1.039.035 itemset) và 48 điểm của basic (tổng 1.020.209 itemset), tỉ lệ khớp đều đạt 100%, và tỉ lệ khớp nhỏ nhất trên từng điểm cũng là 100%: không có itemset thiếu, thừa hay sai support. Basic có ít điểm hơn trên Retail do bị `timeout` hoặc bỏ qua ở minsup thấp (mục C). Kết quả này củng cố các test đơn vị của Chương 1 (71/71 test pass, 24 case đối chiếu SPMF) trên dữ liệu lớn hơn nhiều.
+Trên 55 điểm chạy của bitarray (tổng 1.039.035 itemset) và 48 điểm của basic (tổng 1.020.209 itemset), tỉ lệ khớp đều đạt 100%, và tỉ lệ khớp nhỏ nhất trên từng điểm cũng là 100%: không có itemset thiếu, thừa hay sai support. Basic có ít điểm hơn trên Retail do bị `timeout` hoặc bỏ qua ở minsup thấp (mục C). Kết quả này củng cố các test đơn vị của Chương 1 (187/187 test pass, gồm 12 case × 2 bản = 24 phép so sánh tập phổ biến và 8 case × 2 bản = 16 phép so sánh luật kết hợp với SPMF) trên dữ liệu lớn hơn nhiều.
 
 ## C. Thời gian chạy theo minsup
 
