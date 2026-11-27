@@ -106,9 +106,9 @@ Julia biên dịch hàm ở lần gọi đầu tiên, nên nếu đo ngay lần 
 
 ## G. Kiểm thử
 
-Bộ test chạy bằng `julia --project test/runtests.jl` hoặc `Pkg.test()`, và hiện cho kết quả 161/161 test đạt. Bộ test gồm bốn nhóm.
+Bộ test chạy bằng `julia --project test/runtests.jl` hoặc `Pkg.test()`, và hiện cho kết quả 187/187 test đạt. Bộ test gồm bốn nhóm.
 
-**Unit test cho từng thành phần:** đọc/ghi file, cách tính ngưỡng minsup (gồm trường hợp $0{,}07 \times 3000$ ở trên), bước join và prune, chỉ số cha, đếm support, dựng tidset và phép AND. Có cả các trường hợp biên: CSDL rỗng, CSDL chỉ có một giao dịch, minsup lớn hơn số giao dịch.
+**Unit test cho từng thành phần:** đọc/ghi file, cách tính ngưỡng minsup (gồm trường hợp $0{,}07 \times 3000$ ở trên), bước join và prune, chỉ số cha, đếm support, dựng tidset và phép AND, tham số `maxlen` (giới hạn kích thước tập). Có cả các trường hợp biên: CSDL rỗng, CSDL chỉ có một giao dịch, minsup lớn hơn số giao dịch.
 
 **Đối chiếu tập phổ biến với SPMF** trên 12 case, gồm CSDL ở Figure 3 của bài báo, dữ liệu dày nhỏ, giao dịch dài, dữ liệu thưa và dữ liệu tổng hợp theo bộ sinh ở mục 4.3 của bài báo. Mỗi case so toàn bộ itemset lẫn support, không chỉ so số lượng. Kết quả SPMF được lưu sẵn trong repo, nên chạy test không cần cài Java.
 

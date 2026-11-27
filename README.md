@@ -63,6 +63,8 @@ Notebook: [notebooks/app2_protein_motifs.ipynb](notebooks/app2_protein_motifs.ip
   [applications/bioinformatics.jl](applications/bioinformatics.jl).
 - Kết quả: Apriori tự tìm lại các motif kinase đã biết (HRDLKPEN, DFG, APE); luật
   `{DFG, HRD} => {KINASE}` có confidence 99%.
+- Báo cáo: [docs/chapter3_app2_report.md](docs/chapter3_app2_report.md).
+- Notebook chạy được cả trên Colab lẫn khi mở ngay trong repo (tự tìm thư mục repo, không có thì mới clone).
 
 ## Các bản cài đặt
 | Bản | File | Đếm support |
@@ -122,7 +124,8 @@ CSDL test ([test/data/db/](test/data/db/)) được sinh với seed cố định
 julia --project test/runtests.jl
 ```
 Gồm: unit test, đối chiếu tập phổ biến với SPMF (12 case), đối chiếu luật kết hợp với SPMF
-(8 case, `FPGrowth_association_rules_with_lift`) và so ap-genrules với vét cạn mọi cách tách luật.
+(8 case, `FPGrowth_association_rules_with_lift`), so ap-genrules với vét cạn mọi cách tách luật,
+và kiểm tra tham số `maxlen`.
 Output lần chạy test cuối (Julia 1.12.6, SPMF chạy trên Java 25):
 ```
 Tỉ lệ khớp với SPMF
@@ -171,15 +174,19 @@ rules_sparse_0.3_10       bitarray       76       76   100.0%
 rules_quest_medium_2_50   basic        1873     1873   100.0%
 rules_quest_medium_2_50   bitarray     1873     1873   100.0%
 Test Summary: | Pass  Total  Time
-AprioriFIM    |  161    161  9.5s
+AprioriFIM    |  187    187  11.2s
 ```
 
 ## Cấu trúc
 - `src/`: mã nguồn (io, apriori, apriori_bitarray, rules)
 - `scripts/`: CLI (`main.jl`) và công cụ đối chiếu SPMF
 - `test/`: unit test, CSDL test và kết quả tham chiếu SPMF
-- `benchmarks/`: thực nghiệm; `applications/`: 2 ứng dụng
-- `notebooks/`: notebook Colab; `docs/Report.pdf`: báo cáo
+- `benchmarks/`: đo mức cải thiện của bản tối ưu (Chương 1)
+- `experiments/`: thực nghiệm Chương 2, xem [experiments/README.md](experiments/README.md)
+- `applications/`: mã cho 2 ứng dụng của Chương 3
+- `notebooks/`: notebook Colab
+- `docs/`: báo cáo từng phần ([Chương 1](docs/chapter1_report.md), [Chương 2](docs/chapter2_report.md),
+  [Ứng dụng 2](docs/chapter3_app2_report.md)); `docs/Report.pdf` sẽ được ghép sau
 - `data/`: dữ liệu nhỏ; dữ liệu lớn: TODO link Hugging Face/Kaggle
 
 ## Colab
